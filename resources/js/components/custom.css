@@ -1,3 +1,19 @@
-#mainDiv #table-body {
-    overflow-y: scroll;
+#mainDiv {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 30vh;
+}
+
+.finished {
+    background-color: #86cd82;
+}
+
+.not-finished {
+    background-color: #a0eec0;
+}
+
+.table-head {
+    background-color: #666b6a;
+    color: white;
+    line-height: 30px;
 }

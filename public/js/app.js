@@ -6339,7 +6339,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#mainDiv #table-body {\r\n    overflow-y: scroll;\r\n}\r\n", ""]);
+exports.push([module.i, "#mainDiv {\r\n    overflow-y: auto;\r\n    overflow-x: hidden;\r\n    height: 30vh;\r\n}\r\n\r\n.finished {\r\n    background-color: #86cd82;\r\n}\r\n\r\n.not-finished {\r\n    background-color: #a0eec0;\r\n}\r\n\r\n.table-head {\r\n    background-color: #666b6a;\r\n    color: white;\r\n    line-height: 30px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -66538,7 +66538,7 @@ var Tab = /*#__PURE__*/function (_Component) {
     key: "kompresijaNaziva",
     value: function kompresijaNaziva() {
       if (this.state.tab.isShown) {
-        return this.state.tab.title;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, this.state.tab.title);
       }
 
       return "tab";
@@ -66697,7 +66697,7 @@ var Todos = /*#__PURE__*/function (_Component) {
 
         if (task.id_tab == shownTab.id_tab) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "row border"
+            className: task.done == 1 ? "finished row border" : "not-finished  row border"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "col"
           }, task.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -66710,6 +66710,9 @@ var Todos = /*#__PURE__*/function (_Component) {
           }, "FINISH")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "col"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            onClick: function onClick() {
+              return _this4.deleteTask(task.id_task);
+            },
             className: "btn btn-sm btn-danger"
           }, "DELETE")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "col"
@@ -66742,6 +66745,11 @@ var Todos = /*#__PURE__*/function (_Component) {
       }).then(function (res) {});
     }
   }, {
+    key: "deleteTask",
+    value: function deleteTask(id) {
+      axios["delete"](this.url + "todos/tasks/delete-task?id_task=" + id).then(function (res) {});
+    }
+  }, {
     key: "handlerClick",
     value: function handlerClick(id) {
       console.log(id);
@@ -66753,7 +66761,6 @@ var Todos = /*#__PURE__*/function (_Component) {
       var _this5 = this;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "mainDiv",
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
@@ -66764,19 +66771,21 @@ var Todos = /*#__PURE__*/function (_Component) {
           key: id,
           tab: tab
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row border"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "mainDiv"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row border border-secondary table-head"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col"
-      }, "Naziv taska"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " Naziv taska")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col"
-      }, "Uradi"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Uradi")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col"
-      }, "Izbrisi"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Izbrisi")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col"
-      }, "Napravljen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Napravljen")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col"
-      }, "Zavrsen:")), this.showTasks()));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Zavrsen:"))), this.showTasks()));
     }
   }]);
 

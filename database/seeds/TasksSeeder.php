@@ -18,7 +18,7 @@ class TasksSeeder extends Seeder
             DB::table('tasks')->insert([
                 'title' => Str::random(4),
                 'id_tab' => rand(1, TabsSeeder::$brojTabova),
-                'creation_date' => time()
+                'creation_date' => date("Y-m-d H:i:s")
             ]);
         }
     }

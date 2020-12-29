@@ -23,7 +23,7 @@ export default class Tab extends Component {
 
     kompresijaNaziva() {
         if (this.state.tab.isShown) {
-            return this.state.tab.title;
+            return <b>{this.state.tab.title}</b>;
         }
         return "tab";
     }

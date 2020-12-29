@@ -48,7 +48,13 @@ export default class Todos extends Component {
             console.log(this.state.tasks, "tasks");
             if (task.id_tab == shownTab.id_tab) {
                 return (
-                    <div className="row border">
+                    <div
+                        className={
+                            task.done == 1
+                                ? "finished row border"
+                                : "not-finished  row border"
+                        }
+                    >
                         <div className="col">{task.title}</div>
                         <div className="col">
                             <button
@@ -59,7 +65,10 @@ export default class Todos extends Component {
                             </button>
                         </div>
                         <div className="col">
-                            <button className="btn btn-sm btn-danger">
+                            <button
+                                onClick={() => this.deleteTask(task.id_task)}
+                                className="btn btn-sm btn-danger"
+                            >
                                 DELETE
                             </button>
                         </div>
@@ -97,6 +106,12 @@ export default class Todos extends Component {
             .then(res => {});
     }
 
+    deleteTask(id) {
+        axios
+            .delete(this.url + "todos/tasks/delete-task?id_task=" + id)
+            .then(res => {});
+    }
+
     handlerClick(id) {
         console.log(id);
         this.showTab(id);
@@ -104,7 +119,7 @@ export default class Todos extends Component {
 
     render() {
         return (
-            <div id="mainDiv" className="container">
+            <div className="container">
                 <div className="row">
                     {this.state.tabs.map(tab => {
                         let id = tab.id_tab;
@@ -117,13 +132,24 @@ export default class Todos extends Component {
                         );
                     })}
                 </div>
-                <div>
-                    <div className="row border">
-                        <div className="col">Naziv taska</div>
-                        <div className="col">Uradi</div>
-                        <div className="col">Izbrisi</div>
-                        <div className="col">Napravljen</div>
-                        <div className="col">Zavrsen:</div>
+                <br></br>
+                <div id="mainDiv">
+                    <div className="row border border-secondary table-head">
+                        <div className="col">
+                            <b> Naziv taska</b>
+                        </div>
+                        <div className="col">
+                            <b>Uradi</b>
+                        </div>
+                        <div className="col">
+                            <b>Izbrisi</b>
+                        </div>
+                        <div className="col">
+                            <b>Napravljen</b>
+                        </div>
+                        <div className="col">
+                            <b>Zavrsen:</b>
+                        </div>
                     </div>
                     {this.showTasks()}
                 </div>

@@ -54,5 +54,6 @@ class TaskController extends Controller
     {
         $id_task = $request->input('id_task');
         Task::where('id_task', $id_task)->delete();
+        echo strval($id_task);
     }
 }
