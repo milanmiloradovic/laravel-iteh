@@ -40,13 +40,11 @@ class TaskController extends Controller
     public function addTask(Request $request)
     {
         $title = $request->input('title');
-        $id_tab =  DB::table('tabs')
-            ->select('id_tab')
-            ->where('isShown', 1)
-            ->get();
+        $id_tab = $request->input('id_tab');
         Task::insert([
             'title' => $title,
-            'id_tab' => $id_tab
+            'id_tab' => $id_tab,
+            'creation_date' => date("Y-m-d H:i:s")
         ]);
     }
     // DELETE

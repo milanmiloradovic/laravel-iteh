@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Tab from "./Tab";
+import Forma from "./Forma";
 import "./custom.css";
 
 export default class Todos extends Component {
@@ -8,7 +9,8 @@ export default class Todos extends Component {
         super(props);
         this.state = {
             tabs: [],
-            tasks: []
+            tasks: [],
+            newTask: ""
         };
         this.url = "http://127.0.0.1:8000/";
 
@@ -16,6 +18,7 @@ export default class Todos extends Component {
         this.getTasks();
 
         this.handlerClick = this.handlerClick.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.showTasks = this.showTasks.bind(this);
     }
 
@@ -33,19 +36,22 @@ export default class Todos extends Component {
         });
     }
 
-    showTasks() {
+    getShownTab() {
         let tabs = this.state.tabs;
         let shownTab = 0;
 
         for (const tab of tabs) {
             if (tab.isShown) {
                 shownTab = tab;
-                break;
+                return shownTab;
             }
         }
+    }
 
+    showTasks() {
+        let shownTab = this.getShownTab();
+        if (!shownTab) return "Cekirajte neki od tabova iznad!!";
         return this.state.tasks.map(task => {
-            console.log(this.state.tasks, "tasks");
             if (task.id_tab == shownTab.id_tab) {
                 return (
                     <div
@@ -113,8 +119,19 @@ export default class Todos extends Component {
     }
 
     handlerClick(id) {
-        console.log(id);
         this.showTab(id);
+    }
+
+    handleSubmit(title) {
+        console.log(title);
+        let shownTab = this.getShownTab();
+        let id_tab = shownTab.id_tab;
+        axios
+            .post(this.url + "todos/tasks/create-task", {
+                title: title,
+                id_tab: id_tab
+            })
+            .then(res => {});
     }
 
     render() {
@@ -152,6 +169,10 @@ export default class Todos extends Component {
                         </div>
                     </div>
                     {this.showTasks()}
+                </div>
+
+                <div id="formaDodajTask">
+                    <Forma addTask={this.handleSubmit} />
                 </div>
             </div>
         );
