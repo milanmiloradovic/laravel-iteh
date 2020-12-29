@@ -22,7 +22,7 @@
 
 
     @section('sadrzaj')
-    @push('')
+
     <div id="todos"></div>
     @endsection
 

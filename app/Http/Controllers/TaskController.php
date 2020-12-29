@@ -34,6 +34,7 @@ class TaskController extends Controller
         $id_task = $request->input('id_task');
         $done = $request->input('done');
         Task::where('id_task', $id_task)->update(['done' => $done]);
+        echo $done;
     }
     // CREATE
     public function addTask(Request $request)

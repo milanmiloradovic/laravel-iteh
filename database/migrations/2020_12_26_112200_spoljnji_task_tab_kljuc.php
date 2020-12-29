@@ -31,7 +31,7 @@ class SpoljnjiTaskTabKljuc extends Migration
     public function down()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->dropForeign('task_id_tab_foreign');
+            $table->dropForeign('tasks_id_tab_foreign');
         });
     }
 }
