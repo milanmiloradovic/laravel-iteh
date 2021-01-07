@@ -13,7 +13,7 @@ class TaskController extends Controller
     public function getTasksID(Request $request)
     {
         $tab_id = $request->input('id_tab');
-        $tasks = Task::where('id_tab', $tab_id)->get();
+        $tasks = Tab::find($tab_id)->tasks()->get();
 
         return response()->json([
             'tasks' => $tasks
